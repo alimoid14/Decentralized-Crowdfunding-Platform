@@ -1,13 +1,16 @@
 import { createThirdwebClient } from "thirdweb";
 
-// Replace this with your client ID string
-// refer to https://portal.thirdweb.com/typescript/v5/client on how to get a client ID
-const clientId = process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID;
+// Fetch the client ID from environment variables
+const clientId: string | undefined = process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID;
 
+// Ensure the client ID is provided
 if (!clientId) {
-  throw new Error("No client ID provided");
+  throw new Error(
+    "Environment variable NEXT_PUBLIC_TEMPLATE_CLIENT_ID is missing."
+  );
 }
 
+// Initialize the Thirdweb client
 export const client = createThirdwebClient({
-  clientId: clientId,
+  clientId,
 });

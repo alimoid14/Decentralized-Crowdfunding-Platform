@@ -100,8 +100,8 @@ const CreateCampaignModal = ({
           _goal: campaignGoal,
           _durationInDays: campaignDeadline,
         },
-        publisher: "0xa2A618496FC75939595aD775849071b90cAA4648",
-        version: "1.0.4",
+        publisher: process.env.NEXT_PUBLIC_PUBLISHER as string | undefined,
+        version: process.env.NEXT_PUBLIC_VERSION as string | undefined,
       });
       alert("Contract deployed successfully!");
     } catch (error) {

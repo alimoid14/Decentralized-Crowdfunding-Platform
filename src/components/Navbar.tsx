@@ -4,9 +4,22 @@ import Link from "next/link";
 import { ConnectButton, lightTheme, useActiveAccount } from "thirdweb/react";
 import Image from "next/image";
 import thirdwebIcon from "@public/thirdweb.svg";
+import { useState } from "react";
+import { RiMenuUnfold3Line2 } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const account = useActiveAccount();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Function to toggle the menu state
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="bg-slate-100 border-b-2 border-b-slate-300">
@@ -18,39 +31,36 @@ const Navbar = () => {
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={toggleMenu}
             >
-              <span className="absolute -inset-0.5"></span>
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-              <svg
-                className="hidden h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              {!isMenuOpen ? <RiMenuUnfold3Line2 /> : <IoMdClose />}
             </button>
           </div>
+          {/* Conditionally render the mobile menu based on the state */}
+          {
+            <div
+              className={`h-screen fixed left-0 text-2xl top-16 flex w-full flex-col p-4 text-black transition-transform duration-500 ease-in-out dark:bg-white z-10 sm:hidden ${
+                !isMenuOpen ? "-translate-x-full" : "translate-x-0"
+              }`}
+            >
+              <Link href={"/"} onClick={closeMenu}>
+                <p className="rounded-md px-3 py-2 text-md font-medium text-slate-700">
+                  Campaigns
+                </p>
+              </Link>
+              <hr />
+              {account && (
+                <Link
+                  href={`/dashboard/${account?.address}`}
+                  onClick={closeMenu}
+                >
+                  <p className="rounded-md px-3 py-2 text-md font-medium text-slate-700">
+                    Dashboard
+                  </p>
+                </Link>
+              )}
+            </div>
+          }
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <Image

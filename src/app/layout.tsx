@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-100 text-slate-800">
+      <body className="bg-slate-100 text-slate-800 overflow-x-hidden">
         <ThirdwebProvider>
           <Navbar />
           {children}

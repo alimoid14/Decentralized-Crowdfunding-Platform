@@ -57,7 +57,7 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
   }
 
   return (
-    <div className="flex flex-col justify-between min-w-48 md:max-w-sm p-6 bg-white border border-slate-200 rounded-lg shadow">
+    <div className="flex flex-col justify-between min-w-48 sm:max-w-sm p-6 bg-white border border-slate-200 rounded-lg shadow">
       <div>
         {!isLoadingBalance && (
           <div className="mb-4">

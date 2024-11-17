@@ -29,7 +29,9 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-7xl px-4 mt-4 sm:px-6 lg:px-8">
       <div className="py-10">
-        <h1 className="text-4xl font-bold mb-4">Campaigns:</h1>
+        <h1 className="text-4xl font-extrabold bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent mb-4">
+          Campaigns:
+        </h1>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {!isLoadingCampaigns &&
             campaigns &&

@@ -101,7 +101,11 @@ export default function CampaignPage() {
   return (
     <div className="mx-auto max-w-7xl px-2 mt-4 sm:px-6 lg:px-8">
       <div className="flex flex-row justify-between items-center">
-        {!isLoadingName && <p className="text-4xl font-semibold">{name}</p>}
+        {!isLoadingName && (
+          <p className="text-4xl font-semibold bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent">
+            {name}
+          </p>
+        )}
         {owner === account?.address && (
           <div className="flex flex-row">
             {isEditing && (
@@ -126,21 +130,24 @@ export default function CampaignPage() {
         )}
       </div>
       <div className="my-4">
-        <p className="text-lg font-semibold">Description:</p>
+        <p className="text-lg font-semibold text-blue-800">Description:</p>
         <p>{description}</p>
       </div>
       <div className="mb-4">
-        <p className="text-lg font-semibold">Deadline</p>
+        <p className="text-lg font-semibold text-blue-800">Deadline</p>
         {!isLoadingDeadline && <p>{deadlineDate.toDateString()}</p>}
       </div>
       {!isLoadingBalance && (
         <div className="mb-4">
-          <p className="text-lg font-semibold">
-            Campaign Goal: ${goal?.toString()}
-          </p>
+          <span className="text-lg font-semibold text-blue-800">
+            Campaign Goal:
+          </span>{" "}
+          <span className="font-semibold text-lg bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent">
+            ${goal?.toString()}
+          </span>
           <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
             <div
-              className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right"
+              className="h-6 bg-blue-600 rounded-full text-right"
               style={{ width: `${balancePercentage?.toString()}%` }}
             >
               <p className="text-white dark:text-white text-xs p-1">
@@ -156,7 +163,7 @@ export default function CampaignPage() {
         </div>
       )}
       <div>
-        <p className="text-lg font-semibold">Tiers:</p>
+        <p className="text-lg font-semibold text-blue-800">Tiers:</p>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {isLoadingTiers ? (
             <p>Loading...</p>

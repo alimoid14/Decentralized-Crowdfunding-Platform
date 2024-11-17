@@ -21,7 +21,7 @@ export const TierCard: React.FC<TierCardProps> = ({
   isEditing,
 }) => {
   return (
-    <div className="max-w-sm flex flex-col justify-between p-6 bg-white border border-slate-100 rounded-lg shadow">
+    <div className="sm:max-w-sm flex flex-col justify-between p-6 bg-white border border-slate-100 rounded-lg shadow">
       <div>
         <div className="flex flex-row justify-between items-center">
           <p className="text-2xl font-semibold">{tier.name}</p>
@@ -45,6 +45,7 @@ export const TierCard: React.FC<TierCardProps> = ({
           onTransactionConfirmed={async () => alert("Funded successfully!")}
           style={{
             marginTop: "1rem",
+            minWidth: "50%",
             backgroundColor: "#2563EB",
             color: "white",
             padding: "0.5rem 1rem",

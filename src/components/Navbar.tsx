@@ -7,6 +7,7 @@ import thirdwebIcon from "@public/thirdweb.svg";
 import { useState } from "react";
 import { RiMenuUnfold3Line2 } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
+import { TiThMenuOutline } from "react-icons/ti";
 
 const Navbar = () => {
   const account = useActiveAccount();
@@ -33,7 +34,7 @@ const Navbar = () => {
               aria-expanded="false"
               onClick={toggleMenu}
             >
-              {!isMenuOpen ? <RiMenuUnfold3Line2 /> : <IoMdClose />}
+              {!isMenuOpen ? <TiThMenuOutline /> : <IoMdClose />}
             </button>
           </div>
           {/* Conditionally render the mobile menu based on the state */}

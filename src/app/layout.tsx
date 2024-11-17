@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThirdwebProvider } from "thirdweb/react";
 import Navbar from "@/components/Navbar";
+import ParticlesBg from "@/components/ParticlesBg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="bg-slate-100 text-slate-800 overflow-x-hidden">
         <ThirdwebProvider>
           <Navbar />
+          <ParticlesBg />
           {children}
         </ThirdwebProvider>
       </body>

@@ -121,7 +121,7 @@ const CreateCampaignModal = ({
     }
   };
 
-  const handleCampaignLengthhange = (value: number) => {
+  const handleCampaignLength = (value: number) => {
     if (value < 1) {
       setCampaignDeadline(1);
     } else {
@@ -131,7 +131,7 @@ const CreateCampaignModal = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center backdrop-blur-md">
-      <div className="w-1/2 bg-slate-100 p-6 rounded-md">
+      <div className="sm:w-1/2 bg-slate-100 p-6 rounded-md">
         <div className="flex justify-between items-center mb-4">
           <p className="text-lg font-semibold">Create a Campaign</p>
           <button
@@ -165,16 +165,13 @@ const CreateCampaignModal = ({
             className="mb-4 px-4 py-2 bg-slate-300 rounded-md"
           />
           <label>{`Campaign Length (Days)`}</label>
-          <div className="flex space-x-4">
-            <input
-              type="number"
-              value={campaignDeadline}
-              onChange={(e) =>
-                handleCampaignLengthhange(parseInt(e.target.value))
-              }
-              className="mb-4 px-4 py-2 bg-slate-300 rounded-md"
-            />
-          </div>
+
+          <input
+            type="number"
+            value={campaignDeadline}
+            onChange={(e) => handleCampaignLength(parseInt(e.target.value))}
+            className="mb-4 px-4 py-2 bg-slate-300 rounded-md"
+          />
 
           <button
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"

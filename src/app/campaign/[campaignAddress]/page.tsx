@@ -180,7 +180,7 @@ export default function CampaignPage() {
           ) : (
             !isEditing && <p>No tiers available</p>
           )}
-          {isEditing && (
+          {isEditing && status === 0 && (
             // Add a button card with text centered in the middle
             <button
               className="max-w-sm flex flex-col text-center justify-center items-center font-semibold p-6 bg-blue-500 text-white border border-slate-100 rounded-lg shadow"

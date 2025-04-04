@@ -56,29 +56,6 @@ export const TierCard: React.FC<TierCardProps> = ({
           Select
         </TransactionButton>
       </div>
-      {isEditing && (
-        <TransactionButton
-          transaction={() =>
-            prepareContractCall({
-              contract: contract,
-              method: "function removeTier(uint256 _index)",
-              params: [BigInt(index)],
-            })
-          }
-          onError={(error) => alert(`Error: ${error.message}`)}
-          onTransactionConfirmed={async () => alert("Removed successfully!")}
-          style={{
-            marginTop: "1rem",
-            backgroundColor: "red",
-            color: "white",
-            padding: "0.5rem 1rem",
-            borderRadius: "0.375rem",
-            cursor: "pointer",
-          }}
-        >
-          Remove
-        </TransactionButton>
-      )}
     </div>
   );
 };

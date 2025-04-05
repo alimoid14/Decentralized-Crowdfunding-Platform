@@ -111,11 +111,11 @@ export default function CampaignPage() {
             {isEditing && (
               <p className="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">
                 Status:
-                {status === 0
+                {status === 0 && !hasDeadlinePassed
                   ? " Active"
                   : status === 1
                   ? " Successful"
-                  : status === 2
+                  : status === 2 || hasDeadlinePassed
                   ? " Failed"
                   : "Unknown"}
               </p>
@@ -175,12 +175,13 @@ export default function CampaignPage() {
                 index={index}
                 contract={contract}
                 isEditing={isEditing}
+                hasDeadlinePassed={hasDeadlinePassed}
               />
             ))
           ) : (
             !isEditing && <p>No tiers available</p>
           )}
-          {isEditing && status === 0 && (
+          {isEditing && status === 0 && hasDeadlinePassed == false && (
             // Add a button card with text centered in the middle
             <button
               className="max-w-sm flex flex-col text-center justify-center items-center font-semibold p-6 bg-blue-500 text-white border border-slate-100 rounded-lg shadow"

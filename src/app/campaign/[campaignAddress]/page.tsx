@@ -106,6 +106,7 @@ export default function CampaignPage() {
             {name}
           </p>
         )}
+
         {owner === account?.address && (
           <div className="flex flex-row">
             {isEditing && (
@@ -121,12 +122,44 @@ export default function CampaignPage() {
               </p>
             )}
             <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md self-end"
               onClick={() => setIsEditing(!isEditing)}
             >
               {isEditing ? "Done" : "Edit"}
             </button>
+            {status === 1 && hasDeadlinePassed && (
+              <TransactionButton
+                transaction={() =>
+                  prepareContractCall({
+                    contract: contract,
+                    method: "function withdraw()",
+                  })
+                }
+                onError={(error) => alert(`Error: ${error.message}`)}
+                onTransactionConfirmed={async () =>
+                  alert("Funds collected successfully!")
+                }
+                className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              >
+                Withdraw
+              </TransactionButton>
+            )}
           </div>
+        )}
+        {hasDeadlinePassed && status !== 1 && (
+          <TransactionButton
+            transaction={() =>
+              prepareContractCall({
+                contract: contract,
+                method: "function refund()",
+              })
+            }
+            onError={(error) => alert(`Error: ${error.message}`)}
+            onTransactionConfirmed={async () => alert("Refund successful!")}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+          >
+            Refund
+          </TransactionButton>
         )}
       </div>
       <div className="my-4">

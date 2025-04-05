@@ -45,6 +45,19 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
     params: [],
   });
 
+  // Campaign deadline
+  const { data: deadline, isLoading: isLoadingDeadline } = useReadContract({
+    contract: contract,
+    method: "function deadline() view returns (uint256)",
+    params: [],
+  });
+  // Convert deadline to a date
+  const deadlineDate = new Date(
+    parseInt(deadline?.toString() as string) * 1000
+  );
+  // Check if deadline has passed
+  const hasDeadlinePassed = deadlineDate < new Date();
+
   // Calulate the total funded balance percentage
   const totalBalance = balance?.toString();
   const totalGoal = goal?.toString();
@@ -61,21 +74,27 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
       <div>
         {!isLoadingBalance && (
           <div className="mb-4">
-            <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
-              <div
-                className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right"
-                style={{ width: `${balancePercentage?.toString()}%` }}
-              >
-                <p className="text-white dark:text-white text-xs p-1">
-                  ${balance?.toString()}
+            {hasDeadlinePassed === false ? (
+              <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
+                <div
+                  className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right"
+                  style={{ width: `${balancePercentage?.toString()}%` }}
+                >
+                  <p className="text-white dark:text-white text-xs p-1">
+                    ${balance?.toString()}
+                  </p>
+                </div>
+                <p className="absolute top-0 right-0 text-white dark:text-white text-xs p-1">
+                  {balancePercentage >= 100
+                    ? ""
+                    : `${balancePercentage?.toString()}%`}
                 </p>
               </div>
-              <p className="absolute top-0 right-0 text-white dark:text-white text-xs p-1">
-                {balancePercentage >= 100
-                  ? ""
-                  : `${balancePercentage?.toString()}%`}
-              </p>
-            </div>
+            ) : (
+              <div className="relative w-full h-6 bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent font-bold">
+                Campaign Ended
+              </div>
+            )}
           </div>
         )}
         <h5 className="mb-2 text-2xl font-bold tracking-tight overflow-x-hidden">

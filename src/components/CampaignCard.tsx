@@ -45,6 +45,13 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
     params: [],
   });
 
+  // Get status of the campaign
+  const { data: status } = useReadContract({
+    contract,
+    method: "function state() view returns (uint8)",
+    params: [],
+  });
+
   // Campaign deadline
   const { data: deadline, isLoading: isLoadingDeadline } = useReadContract({
     contract: contract,
@@ -92,7 +99,7 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
               </div>
             ) : (
               <div className="relative w-full h-6 bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent font-bold">
-                Campaign Ended
+                Campaign{status === 1 ? " Successful!" : " Failed!"}
               </div>
             )}
           </div>

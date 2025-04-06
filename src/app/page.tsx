@@ -5,6 +5,8 @@ import { baseSepolia } from "thirdweb/chains";
 import { getContract } from "thirdweb";
 import { CampaignCard } from "@/components/CampaignCard";
 import { CROWDFUNDING_FACTORY } from "./constants/contracts";
+import { useEffect, useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function Home() {
   // Get CrowdfundingFactory contract
@@ -26,6 +28,18 @@ export default function Home() {
     params: [],
   });
 
+  //reverse the campaign array
+  const [reversedCampaigns, setReversedCampaigns] = useState([
+    { campaignAddress: "", owner: "", name: "" },
+  ]);
+
+  useEffect(() => {
+    if (campaigns && campaigns.length > 0) {
+      // Reverse campaigns once when loaded
+      setReversedCampaigns([...campaigns].reverse());
+    }
+  }, [campaigns]);
+
   return (
     <main className="mx-auto max-w-7xl px-4 mt-4 sm:px-6 lg:px-8">
       <div className="py-10">
@@ -33,10 +47,17 @@ export default function Home() {
           Campaigns:
         </h1>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {isLoadingCampaigns && (
+            <p className="text-3xl font-semibold text-blue-500 mb-4">
+              Loading campaigns{" "}
+              <AiOutlineLoading className="inline animate-spin" />
+            </p>
+          )}
           {!isLoadingCampaigns &&
             campaigns &&
-            (campaigns.length > 0 ? (
-              campaigns.map((campaign) => (
+            reversedCampaigns &&
+            (campaigns.length > 0 && reversedCampaigns.length > 0 ? (
+              reversedCampaigns.map((campaign) => (
                 <CampaignCard
                   key={campaign.campaignAddress}
                   campaignAddress={campaign.campaignAddress}

@@ -178,6 +178,16 @@ export default function CampaignPage() {
           <span className="font-semibold text-lg bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent">
             ${goal?.toString()}
           </span>
+          {hasDeadlinePassed && status !== 1 && (
+            <p className="text-lg font-semibold text-red-600">
+              Campaign Failed!
+            </p>
+          )}
+          {hasDeadlinePassed && status === 1 && (
+            <p className="text-lg font-semibold text-green-600">
+              Campaign Success!
+            </p>
+          )}
           <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
             <div
               className="h-6 bg-blue-600 rounded-full text-right"

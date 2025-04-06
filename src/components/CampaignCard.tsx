@@ -82,7 +82,7 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
         {!isLoadingBalance && (
           <div className="mb-4">
             {hasDeadlinePassed === false ? (
-              <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
+              <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-500">
                 <div
                   className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right"
                   style={{ width: `${balancePercentage?.toString()}%` }}
@@ -99,7 +99,15 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
               </div>
             ) : (
               <div className="relative w-full h-6 bg-gradient-to-b from-pink-600 to-purple-700 bg-clip-text text-transparent font-bold">
-                Campaign{status === 1 ? " Successful!" : " Failed!"}
+                {status === 1 ? (
+                  <span className="bg-gradient-to-b from-blue-500 to-purple-700 bg-clip-text">
+                    Campaign Success!!!
+                  </span>
+                ) : (
+                  <span className="bg-gradient-to-b from-red-600 to-purple-700 bg-clip-text">
+                    Campaign Failed!
+                  </span>
+                )}
               </div>
             )}
           </div>

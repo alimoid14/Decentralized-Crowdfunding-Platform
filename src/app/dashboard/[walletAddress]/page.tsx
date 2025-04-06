@@ -7,6 +7,7 @@ import { getContract } from "thirdweb";
 import { baseSepolia } from "thirdweb/chains";
 import { deployPublishedContract } from "thirdweb/deploys";
 import { useActiveAccount, useReadContract } from "thirdweb/react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function DashboardPage() {
   const account = useActiveAccount();
@@ -46,6 +47,12 @@ export default function DashboardPage() {
       </div>
       <p className="text-2xl font-semibold mb-4 text-blue-800">My Campaigns:</p>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {isLoadingMyCampaigns && (
+          <p className="text-3xl font-semibold text-blue-500 mb-4">
+            Loading campaigns{" "}
+            <AiOutlineLoading className="inline animate-spin" />
+          </p>
+        )}
         {!isLoadingMyCampaigns &&
           (myCampaigns && myCampaigns.length > 0 ? (
             myCampaigns.map((campaign, index) => (

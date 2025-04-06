@@ -5,7 +5,6 @@ import { ConnectButton, lightTheme, useActiveAccount } from "thirdweb/react";
 import Image from "next/image";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { useState } from "react";
-import { RiMenuUnfold3Line2 } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
 import { TiThMenuOutline } from "react-icons/ti";
 
